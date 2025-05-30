@@ -2,13 +2,25 @@ from fastapi import FastAPI
 from pydantic import BaseModel # this will define the structure of the incoming sensor data
 import joblib
 import numpy as np
+from fastapi.middleware.cors import CORSMiddleware
+
+
+# FastAPI app instance
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or replace "*" with ["http://localhost:5173"] for more security
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # loading the trained model and scaler 
 model = joblib.load('model.joblib') 
 scaler = joblib.load('scaler.joblib')
 
-# FastAPI app instance
-app = FastAPI()
+
 
 # defining the expected input structure using Pydantic
 # this will define the JSON structure for the POST request
