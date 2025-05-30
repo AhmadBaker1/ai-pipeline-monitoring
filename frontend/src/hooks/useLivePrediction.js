@@ -17,7 +17,7 @@ const useLivePrediction = () => {
         };
 
         try {
-          const response = await axios.post('http://127.0.0.1:8000/predict', simulatedData);
+          const response = await axios.post('https://pipeline-backend-j9c9.onrender.com/predict', simulatedData);
 
           const prediction = response.data;
           setData(prediction.input);
