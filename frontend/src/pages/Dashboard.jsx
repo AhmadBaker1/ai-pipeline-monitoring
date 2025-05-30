@@ -1,4 +1,3 @@
-// RedesignedDashboard.jsx
 import React from 'react';
 import SensorCard from '../components/SensorCard';
 import AIDetectionPanel from '../components/AIDetectionPanel';
@@ -10,7 +9,7 @@ const Dashboard = () => {
 
   return (
     <div className="p-8 space-y-8 overflow-y-auto text-white bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 min-h-screen">
-      {/* Header Section */}
+     
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-cyan-300">Pipeline Monitor</h1>
@@ -22,15 +21,15 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Sensor Grid */}
+     
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <SensorCard title="Pressure (PSI)" value={data ? `${data.pressure}` : '...'} />
         <SensorCard title="Flow Rate (BBL/H)" value={data ? `${data.flow_rate}` : '...'} />
-        <SensorCard title="Temperature (°F)" value={data ? `${data.temperature}` : '...'} />
+        <SensorCard title="Temperature (°C)" value={data ? `${data.temperature}` : '...'} />
         <SensorCard title="Vibration (mm/s)" value={data ? `${data.vibration}` : '...'} />
       </div>
 
-      {/* Center Flex Section: AI Panel Left + Alerts Right */}
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div>
           <AIDetectionPanel anomalyResult={anomalyResult} className="h-full" />
@@ -40,7 +39,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Flow Animation */}
+      
       <div className="bg-cyan-900/10 border border-cyan-400/20 rounded-2xl p-6 mt-6">
         <p className="text-sm text-gray-300 mb-2">Pipeline Flow Visualization</p>
         <div className="relative w-full h-4 rounded-full bg-cyan-800 overflow-hidden">
@@ -48,7 +47,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex items-center justify-center text-center h-40">
           <p className="text-gray-400">📊 Coming soon: Session Stats</p>
