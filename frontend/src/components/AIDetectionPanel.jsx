@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaRobot } from 'react-icons/fa';
+import { AiOutlineRobot } from 'react-icons/ai';
 
 const AIDetectionPanel = ({ anomalyResult }) => {
   const isAnomaly = anomalyResult;
