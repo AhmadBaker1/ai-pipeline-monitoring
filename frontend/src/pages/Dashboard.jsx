@@ -1,70 +1,42 @@
 import React from 'react';
+
 import SensorCard from '../components/SensorCard';
-import AIDetectionPanel from '../components/AIDetectionPanel';
-import AlertPanel from '../components/AlertPanel';
-import useLivePrediction from '../hooks/useLivePrediction';
+import useLivePrediction from '../hooks/useLivePrediction'; 
+import LiveAlerts from '../components/LiveAlerts';
+import { MdSpeed } from 'react-icons/md'
+import { TbDropletFilled } from 'react-icons/tb'
+import { LuThermometer, LuActivity } from 'react-icons/lu'
+
 
 const Dashboard = () => {
-  const { data, anomalyResult, alerts } = useLivePrediction();
-
+  const { data, alerts} = useLivePrediction();
   return (
-    <div className="p-8 space-y-8 overflow-y-auto text-white bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 min-h-screen">
-     
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-cyan-300">Pipeline Monitor</h1>
-          <p className="text-sm text-gray-400">Real-time anomaly detection & telemetry</p>
-        </div>
-        <div className="flex gap-4">
-          <span className="text-green-400 bg-green-500/10 px-3 py-1 rounded-full text-xs font-semibold">System Online</span>
-          <span className="text-cyan-300 bg-cyan-400/10 px-3 py-1 rounded-full text-xs font-semibold">AI Active</span>
-        </div>
-      </div>
-
-     
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <SensorCard title="Pressure (PSI)" value={data ? `${data.pressure}` : '...'} />
-        <SensorCard title="Flow Rate (BBL/H)" value={data ? `${data.flow_rate}` : '...'} />
-        <SensorCard title="Temperature (°C)" value={data ? `${data.temperature}` : '...'} />
-        <SensorCard title="Vibration (mm/s)" value={data ? `${data.vibration}` : '...'} />
-      </div>
-
+    <div className="flex">
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div>
-          <AIDetectionPanel anomalyResult={anomalyResult} className="h-full" />
+      <main className="ml-64 p-8 w-full min-h-screen bg-gradient-to-br from-[#0a0c10] to-[#1a1d22] text-white overflow-y-auto">
+        <h1 className="text-2xl font-bold text-white mb-6">Real-Time Dashboard</h1>
+
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-8 items-start">
+        {/* Real-time metrics section (2/3 of the width) */}
+        <div className="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <SensorCard title="Pressure" value={data?.pressure?.toFixed(2)} icon={<MdSpeed />} color="text-cyan-400" unit="PSI" />
+          <SensorCard title="Flow Rate" value={data?.flow_rate?.toFixed(2)} icon={<TbDropletFilled />} color="text-indigo-400" unit="m³/h" />
+          <SensorCard title="Temperature" value={data?.temperature?.toFixed(2)} icon={<LuThermometer />} color="text-red-400" unit="°C" />
+          <SensorCard title="Vibration" value={data?.vibration?.toFixed(4)} icon={<LuActivity />} color="text-pink-400" unit="" />
         </div>
-        <div className="lg:col-span-2">
-          <AlertPanel alerts={alerts.slice(0, 3)} layout="vertical" />
+
+        {/* Live Alerts panel (1/3 of the width) */}
+        <div className="bg-red-950/10 border border-red-800 p-4 rounded-xl overflow-y-auto max-h-[500px] min-h-[300px] custom-scroll">
+          <h2 className="text-lg font-semibold text-red-300 mb-4">Live Alerts</h2>
+          <LiveAlerts alerts={alerts} />
         </div>
       </div>
 
-      
-      <div className="bg-cyan-900/10 border border-cyan-400/20 rounded-2xl p-6 mt-6">
-        <p className="text-sm text-gray-300 mb-2">Pipeline Flow Visualization</p>
-        <div className="relative w-full h-4 rounded-full bg-cyan-800 overflow-hidden">
-          <div className="absolute left-0 w-1/4 h-full bg-cyan-400 animate-[flow_2s_linear_infinite] rounded-full blur-sm" />
-        </div>
-      </div>
 
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex items-center justify-center text-center h-40">
-          <p className="text-gray-400">📊 Coming soon: Session Stats</p>
+        <div className="mt-12">
+          {/* Flow animation + chart area */}
         </div>
-        <div className="bg-white/5 rounded-2xl p-6 border border-white/10 flex items-center justify-center text-center h-40">
-          <p className="text-gray-400">🛠️ Coming soon: Pipeline Overview</p>
-        </div>
-      </div>
-
-      <style>
-        {`
-          @keyframes flow {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(100%); }
-          }
-        `}
-      </style>
+      </main>
     </div>
   );
 };

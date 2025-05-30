@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Navbar() {
     return (
       <header className="bg-slate-800 p-4 shadow-md flex justify-between items-center">

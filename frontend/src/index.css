@@ -1,24 +1,60 @@
 @import "tailwindcss";
 
-/* Aggressive reset for all elements */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+/* Custom base styles */
+body {
+  @apply bg-[#0b0f1a] text-white font-sans;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Reset html, body, and root container */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
+/* Typography smoothing & antialiasing */
+html {
+  @apply antialiased;
 }
 
-/* Reset the React root div */
-#root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
+/* Scrollbar styling (optional) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4b5563; /* gray-600 */
+  border-radius: 9999px;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #ef4444; /* red-500 */
+  border-radius: 10px;
+}
+
+@keyframes flow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-flow {
+  animation: flow 5s  infinite;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 1000;
+  animation: draw 30s linear infinite;
 }
