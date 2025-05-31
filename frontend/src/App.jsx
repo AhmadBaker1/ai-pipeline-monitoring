@@ -15,7 +15,7 @@ function App() {
           <Sidebar />
           <main className="flex-1 overflow-y-auto">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/anomaly-logs" element={<AnomalyLogs />} />
             </Routes>
           </main>

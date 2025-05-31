@@ -4,14 +4,14 @@ import random
 from datetime import datetime
 
 # we will define how many data points we want to generate
-NUM_ROWS = 1000 # generate 1000 fake readings for now
+NUM_ROWS = 5000 # generate 1000 fake readings for now
 OUTPUT_FILE = 'normal_data.csv'
 
 # we will then define the normal operating ranges for each sensor 
-NORMAL_PRESSURE = (140, 160)  # Normal pressure range in psi 
-NORMAL_FLOW = (11.5, 12.5)  # Barrels per hour
-NORMAL_TEMP = (25, 35)  # Normal temperature in Celsius
-NORMAL_VIBRATION = (0.02, 0.05) # mm/s
+NORMAL_PRESSURE = (135, 165)  # Normal pressure range in psi 
+NORMAL_FLOW = (11.0, 13.0)  # Barrels per hour
+NORMAL_TEMP = (23, 37)  # Normal temperature in Celsius
+NORMAL_VIBRATION = (0.015, 0.06) # mm/s
 
 # we will create and open the CSV file to write data 
 with open(OUTPUT_FILE, mode="w", newline='') as file:

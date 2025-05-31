@@ -4,7 +4,7 @@ __pycache__/
 *.pkl
 *.joblib
 *.csv
-*.ipynb_checkpoints/
+
 
 # === FastAPI logs or local files ===
 *.log
@@ -16,7 +16,7 @@ build/
 .DS_Store
 
 # === Jupyter Notebook checkpoints ===
-.ipynb_checkpoints/
+
 
 # === Docker ===
 *.tar

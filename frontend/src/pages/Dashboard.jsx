@@ -6,10 +6,11 @@ import LiveAlerts from '../components/LiveAlerts';
 import { MdSpeed } from 'react-icons/md'
 import { TbDropletFilled } from 'react-icons/tb'
 import { LuThermometer, LuActivity } from 'react-icons/lu'
+import AIDetectionPanel from '../components/AIDetectionPanel';
 
 
 const Dashboard = () => {
-  const { data, alerts} = useLivePrediction();
+  const { data, alerts, anomalyResult } = useLivePrediction();
   return (
     <div className="flex">
       
@@ -27,11 +28,25 @@ const Dashboard = () => {
 
         {/* Live Alerts panel (1/3 of the width) */}
         <div className="bg-red-950/10 border border-red-800 p-4 rounded-xl overflow-y-auto max-h-[500px] min-h-[300px] custom-scroll">
-          <h2 className="text-lg font-semibold text-red-300 mb-4">Live Alerts</h2>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-red-300">Live Alerts</h2>
+              <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" title="Receiving data" />
+            </div>
+      
+            {/* View Logs Button */}
+            <button
+              onClick={() => window.location.href = '/anomaly-logs'} // Update as needed
+              className="text-sm text-gray-400 hover:text-white underline"
+            >
+              View Logs
+            </button>
+          </div>
           <LiveAlerts alerts={alerts} />
         </div>
+        <AIDetectionPanel anomalyResult={anomalyResult} />
       </div>
-
+        
 
         <div className="mt-12">
           {/* Flow animation + chart area */}

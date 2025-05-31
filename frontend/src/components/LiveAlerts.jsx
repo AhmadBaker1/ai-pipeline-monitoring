@@ -1,7 +1,7 @@
 import { MdWarning } from 'react-icons/md'
 
 export default function LiveAlerts({ alerts }) {
-  const latestThree = alerts.slice(-2)
+  const latestThree = alerts.slice(-2).reverse()
 
   return (
     <div className="space-y-4">

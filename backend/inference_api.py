@@ -33,16 +33,16 @@ class SensorData(BaseModel):
 # defining the /predict endpoint
 @app.post("/predict")
 def predict(data: SensorData):
-    # converting the incoming data to a numpy array
+    # Convert incoming data to numpy array
     X_input = np.array([[data.pressure, data.flow_rate, data.temperature, data.vibration]])
-    # scaling the input data using the loaded scaler from training
     X_scaled = scaler.transform(X_input)
 
-    # making the prediction using the loaded model using Isolation Forest to detect anomaly
-    prediction = model.predict(X_scaled)[0] # returns 1 for normal, -1 for anomaly
+    # Predict with Isolation Forest
+    prediction = model.predict(X_scaled)[0]  # 1 = normal, -1 = anomaly
+    score = model.decision_function(X_scaled)[0]  # Higher = more normal
 
-    # return the result now 
     return {
-        "is_anomaly": bool(prediction == -1),  # True if anomaly, False if normal
-        "input": data.model_dump() 
+        "is_anomaly": bool(prediction == -1),
+        "score": float(score),  # just to be safe for JSON serialization
+        "input": data.model_dump()
     }
