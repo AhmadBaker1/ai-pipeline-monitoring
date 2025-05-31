@@ -7,10 +7,11 @@ import { MdSpeed } from 'react-icons/md'
 import { TbDropletFilled } from 'react-icons/tb'
 import { LuThermometer, LuActivity } from 'react-icons/lu'
 import AIDetectionPanel from '../components/AIDetectionPanel';
+import SensorLineChart from '../components/SensorLineChart';
 
 
 const Dashboard = () => {
-  const { data, alerts, anomalyResult } = useLivePrediction();
+  const { data, alerts, anomalyResult, chartData } = useLivePrediction();
   return (
     <div className="flex">
       
@@ -49,7 +50,7 @@ const Dashboard = () => {
         
 
         <div className="mt-12">
-          {/* Flow animation + chart area */}
+          <SensorLineChart chartData={chartData} />
         </div>
       </main>
     </div>

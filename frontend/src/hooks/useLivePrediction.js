@@ -6,6 +6,7 @@ const useLivePrediction = () => {
   const [anomalyResult, setAnomalyResult] = useState(null);
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     const fetchPrediction = async () => {
@@ -23,6 +24,7 @@ const useLivePrediction = () => {
           const score = prediction.score;
           setData(prediction.input);
           setAnomalyResult(prediction.is_anomaly);
+          
 
           // If it is an anomaly, add to alerts
           if (prediction.is_anomaly) {
@@ -38,6 +40,19 @@ const useLivePrediction = () => {
               setAlerts((prev) => [...prev, newAlert]);
           }
 
+          const timestamp = new Date().toLocaleTimeString();
+            setChartData((prev) => {
+              const newPoint = {
+                time: timestamp,
+                pressure: prediction.input.pressure,
+                flow_rate: prediction.input.flow_rate,
+                temperature: prediction.input.temperature,
+                vibration: prediction.input.vibration,
+              };
+              const updated = [...prev, newPoint];
+              return updated.length > 20 ? updated.slice(-20) : updated; // keep only last 20
+            });
+
           setLoading(false);
           } catch (err) {
             console.error('Prediction fetch error:', err.message);
@@ -50,7 +65,7 @@ const useLivePrediction = () => {
       }, []);
       
    
-    return { data, anomalyResult, alerts, loading };
+    return { data, anomalyResult, alerts, loading, chartData };
 };
 
 
