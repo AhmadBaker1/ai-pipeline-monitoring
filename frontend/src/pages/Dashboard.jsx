@@ -8,10 +8,24 @@ import { TbDropletFilled } from 'react-icons/tb'
 import { LuThermometer, LuActivity } from 'react-icons/lu'
 import AIDetectionPanel from '../components/AIDetectionPanel';
 import SensorLineChart from '../components/SensorLineChart';
+import AnomalyContributorsPanel from '../components/AnomalyContributorsPanel';
 
 
 const Dashboard = () => {
-  const { data, alerts, anomalyResult, chartData } = useLivePrediction();
+  const { data, alerts, anomalyResult, chartData, contributors, loading } = useLivePrediction();
+  if (loading || !data) {
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#0a0c10] to-[#1a1d22] text-white">
+      <div className="text-center space-y-4 animate-pulse">
+        <h1 className="text-2xl font-bold text-cyan-400 tracking-wide">🔧 Pipeline AI</h1>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-cyan-400 mx-auto mb-4" />
+        <p className="text-sm text-gray-400 tracking-wider">
+          Initializing AI engine... Turning on gas pipelines for you
+        </p>
+      </div>
+    </div>
+  );
+}
   return (
     <div className="flex">
       
@@ -46,6 +60,7 @@ const Dashboard = () => {
           <LiveAlerts alerts={alerts} />
         </div>
         <AIDetectionPanel anomalyResult={anomalyResult} />
+        <AnomalyContributorsPanel contributors={contributors} />
       </div>
         
 
