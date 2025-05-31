@@ -103,7 +103,6 @@ npm run dev
 
 🌐 Live Demo
 Frontend: https://ai-pipeline-monitoring.vercel.app
-Backend API: https://pipeline-backend-j9c9.onrender.com/predict
 
 💡 Why This Matters
 This project simulates real-world infrastructure monitoring — relevant to:
